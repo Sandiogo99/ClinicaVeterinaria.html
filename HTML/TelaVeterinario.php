@@ -1,7 +1,7 @@
 <?php 
-namespace ClinicaVeterinaria\projeto\html;
- require_once('../PHP/veterinario.php');
- use ClinicaVeterinaria\projeto\php\Veterinario;
+    namespace ClinicaVeterinaria\projeto\html;
+    require_once('../PHP/veterinaria.php');
+    use ClinicaVeterinaria\projeto\php\Veterinario;
 
 ?>
 <!DOCTYPE html>
@@ -14,24 +14,52 @@ namespace ClinicaVeterinaria\projeto\html;
 <body>
     <form method="POST">
     <label>Codigo:</label>
-    <imput type="number" id="codigo" name="codigo"/><br></br>
+    <input type="number" id="codigo" name="codigo"/><br></br>
 
     <label>Nome:</label>
-    <imput type="Text" id="codigo" name="name"/><br></br>
+    <input type="Text" id="codigo" name="nome"/><br></br>
 
     <label>Especialidade:</label>
-    <imput type="Text" id="codigo" name="Especialidade"/><br></br>
+    <input type="Text" id="codigo" name="especialidade"/><br></br>
 
     <label>Salario:</label>
-    <imput type="Text" id="codigo" name="Salario"/><br></br>
+    <input type="Text" id="codigo" name="salario"/><br></br>
 
     <label>Telefone:</label>
-    <imput type="text" id="codigo" name="Telefone"/><br></br>
+    <input type="text" id="codigo" name="telefone"/><br></br>
 
     <label>Ender:</label>
-    <imput type="text" id="codigo" name="Endereco"/><br></br>
+    <input type="text" id="codigo" name="endereco"/><br></br> 
 
-
+     <button type="submit">Cadastrar
+    <?php  
+      if(isset($_POST['codigo'])){
+        $codigo         = $_POST['codigo'];
+        $nome           = $_POST['nome'];
+        $telefone       = $_POST['telefone'];
+        $endereco       = $_POST['endereco'];
+        $salario        = $_POST['salario'];
+        $especialidade  = $_POST['especialidade'];
+        $vet = new Veterinario($codigo, $nome, $especialidade, $salario, $endereco , $telefone);
+         $logico = true;
+      }else{
+        $logico = false;
+      }
+     ?>    
+    </button>
+    <button><a href="#">Voltar</a></button>
+          
+   
 </Form>
+ <div>
+       <?php 
+       if($logico ==true ){
+
+            echo $vet->imprimir();
+       }else{
+         echo "preencha os campos";
+       }
+        ?>
+    </div>
 </body>
 </html>
