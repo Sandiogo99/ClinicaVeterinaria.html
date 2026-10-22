@@ -1,7 +1,16 @@
 <?php 
     namespace ClinicaVeterinaria\projeto\html;
     require_once('../PHP/veterinaria.php');
+    require_once('../DAO/conexao.php');
+    require_once('../DAO/inserir.php');
     use ClinicaVeterinaria\projeto\php\Veterinario;
+    use ClinicaVeterinaria\projeto\DAO\conexao;
+    use ClinicaVeterinaria\projeto\DAO\inserir;
+
+
+    $conexao = new Conexao();
+    $inserir = new Inserir();
+    $mensagem =""; // retornar o resultado do cadastro 
 
 ?>
 <!DOCTYPE html>
@@ -13,8 +22,6 @@
 </head>
 <body>
     <form method="POST">
-    <label>Codigo:</label>
-    <input type="number" id="codigo" name="codigo"/><br></br>
 
     <label>Nome:</label>
     <input type="Text" id="codigo" name="nome"/><br></br>
@@ -28,22 +35,25 @@
     <label>Telefone:</label>
     <input type="text" id="codigo" name="telefone"/><br></br>
 
-    <label>Ender:</label>
+    <label>Endereço:</label>
     <input type="text" id="codigo" name="endereco"/><br></br> 
 
      <button type="submit">Cadastrar
     <?php  
-      if(isset($_POST['codigo'])){
-        $codigo         = $_POST['codigo'];
+      if(isset($_POST['nome'])){
         $nome           = $_POST['nome'];
         $telefone       = $_POST['telefone'];
         $endereco       = $_POST['endereco'];
         $salario        = $_POST['salario'];
         $especialidade  = $_POST['especialidade'];
-        $vet = new Veterinario($codigo, $nome, $especialidade, $salario, $endereco , $telefone);
-         $logico = true;
-      }else{
-        $logico = false;
+       
+        $mensagem = $inserir->cadastrarVeterinario($conexao,
+                                                    $nome,
+                                                    $telefone,
+                                                    $endereco,
+                                                    $salario,
+                                                    $especialidade);
+      
       }
      ?>    
     </button>
@@ -53,9 +63,9 @@
 </Form>
  <div>
        <?php 
-       if($logico ==true ){
+       if(isset($_POST['nome'])){
 
-            echo $vet->imprimir();
+            echo $mensagem;
        }else{
          echo "preencha os campos";
        }

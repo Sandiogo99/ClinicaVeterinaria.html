@@ -1,24 +1,23 @@
 <?php  
    namespace ClinicaVeterinaria\projeto\DAO;
 
-   class conexao {
-    function conectar(){
-      try{
-     $conn = mysql_connect('localhost','root','', 'ClinicaVeterinaria');
-     if($conn){
-        return $conn;
-        echo "conctado!";
-     }else{
-        echo "conexão Falhou!";
+   class Conexao{
+      function conectar(){
+         try{
+            $conn = mysqli_connect('localhost','root','', 'clinicaVeterinaria');
+            if($conn){
+               return $conn;
+               echo "Conectado!";
+            }else{
+               echo "conexão Falhou!";
         
-     }
-
+            }
+         }
+         catch(Expection $erro)
+         {
+            echo "algo deu errado " + $erro;
+         }  
       }
-catch(expection $erro)
-{
-echo "algo deu errado " + $erro;
-}  
-}
 }
 
 
