@@ -35,7 +35,7 @@ $resultado ="";
     </button>
 </form>
 <?php echo $resultado;?>
-<a href="#"><button>Voltar</button></a>
+<a href="../index.php"><button>Voltar</button></a>
     
 </body>
 </html>
